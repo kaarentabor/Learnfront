@@ -1,5 +1,3 @@
-@use "sass:color";
-$bg-color: #b60b0b;
-body {
-    background-color: $bg-color;
-}
+@use "bulma/sass" with (
+ $primary: #EB01A5,
+);
