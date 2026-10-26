@@ -13,8 +13,12 @@ const items = ref([
 
 const newItem = ref('')
 const newImportance = ref('medium')
-const doneItems = computed(() => items.value.filter(item => item.isDone))
-const toDoItems = computed(() => items.value.filter(item => !item.isDone))
+const importanceOrder = { high: 3, medium: 2, low: 1 }
+const sortedItems = computed(() => [...items.value].sort(
+  (a, b) => importanceOrder[b.importance] - importanceOrder[a.importance],
+))
+const doneItems = computed(() => sortedItems.value.filter(item => item.isDone))
+const toDoItems = computed(() => sortedItems.value.filter(item => !item.isDone))
 
 function add() {
   const text = newItem.value.trim()
@@ -44,7 +48,7 @@ function add() {
     </div>
   </form>
 
-  <ItemList :items="items" title="All Items" />
+  <ItemList :items="sortedItems" title="All Items" />
   <ItemList :items="doneItems" title="Done Items" />
   <ItemList :items="toDoItems" title="ToDo Items" />
 </template>
