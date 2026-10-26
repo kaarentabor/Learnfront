@@ -1,20 +1,17 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import './style.scss';
+import { createApp } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import App from './App.vue'
+import ToDo from './pages/ToDo.vue'
+import Modals from './pages/Modals.vue'
+import './style.scss'
 
-createApp(App).mount('#app');
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: [
+    { path: '/', redirect: '/todo' },
+    { path: '/todo', name: 'ToDo', component: ToDo },
+    { path: '/modals', name: 'Modals', component: Modals },
+  ],
+})
 
-let button = document.getElementById('Button');
-console.log({button});
-button.addEventListener('click', function() {
-    if (button.classList.contains('is-primary')) {
-        button.classList.replace('is-primary', 'is-danger');
-    } else {
-        button.classList.replace('is-danger', 'is-primary');
-    }
-});
-let input = document.querySelector('#input');
-let reverseText = document.querySelector('.reverse-text');
-input.addEventListener('change', () => {
-    reverseText.innerHTML = input.value.split('').reverse().join('');
-});
+createApp(App).use(router).mount('#app')

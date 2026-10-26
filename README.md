@@ -1,21 +1,18 @@
-# learnfront
+# Learnfront
 
-A minimal Vite app configured for plain JavaScript.
-
-## Install
-
-```bash
-npm install
-```
+Vue, Vue Router and Bulma classwork.
 
 ## Run locally
 
-```bash
-npm run dev
+```sh
+bun install
+bun run dev
 ```
 
-## Build for production
+## Production build
 
-```bash
-npm run build
+```sh
+bun run build
 ```
+
+Use the ToDo and Modals tabs to open the classwork pages.

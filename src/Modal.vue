@@ -1,9 +1,10 @@
 <script setup>
 defineProps(['active']);
+ defineEmits(['close']);
  
 </script>
 <template>
-    <div class="modal" :class="{ 'is-active': isActive }">
+    <div class="modal" :class="{ 'is-active': active }">
         <div class="modal-background" @click="$emit('close')"></div>
         <div class="modal-content">
             <slot></slot>
