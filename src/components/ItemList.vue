@@ -1,5 +1,12 @@
 <script setup>
 defineProps(['items', 'title'])
+
+const importanceClasses = {
+  high: 'is-danger',
+  medium: 'is-warning',
+  low: 'is-success',
+}
+const importanceLabels = { high: 'Kõrge', medium: 'Keskmine', low: 'Madal' }
 </script>
 
 <template>
@@ -11,6 +18,9 @@ defineProps(['items', 'title'])
           <input type="checkbox" v-model="item.isDone">
           {{ item.text }}
         </label>
+        <span class="tag ml-2" :class="importanceClasses[item.importance]">
+          {{ importanceLabels[item.importance] }}
+        </span>
       </li>
     </ul>
   </section>
