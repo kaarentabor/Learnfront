@@ -15,4 +15,5 @@ bun run dev
 bun run build
 ```
 
-Use the ToDo and Modals tabs to open the classwork pages.
+Use the ToDo, Modals and Important tabs to open the classwork pages.
+

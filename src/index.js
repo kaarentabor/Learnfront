@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import ToDo from './pages/ToDo.vue'
 import Modals from './pages/Modals.vue'
+import Important from './pages/Important.vue'
 import './style.scss'
 
 const router = createRouter({
@@ -11,7 +12,9 @@ const router = createRouter({
     { path: '/', redirect: '/todo' },
     { path: '/todo', name: 'ToDo', component: ToDo },
     { path: '/modals', name: 'Modals', component: Modals },
+    { path: '/important', name: 'Important', component: Important },
   ],
 })
 
 createApp(App).use(router).mount('#app')
+

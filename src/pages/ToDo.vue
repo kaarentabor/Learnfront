@@ -2,14 +2,7 @@
 import { ref, computed } from 'vue'
 import ItemList from '../components/ItemList.vue'
 
-const nextId = () => Date.now() + Math.random()
-
-const items = ref([
-  { id: nextId(), text: 'Piim', isDone: false, importance: 'high' },
-  { id: nextId(), text: 'Viin', isDone: true, importance: 'low' },
-  { id: nextId(), text: 'Sai', isDone: true, importance: 'medium' },
-  { id: nextId(), text: 'Mac', isDone: false, importance: 'low' },
-])
+import { items, nextId } from '../items.js'
 
 const newItem = ref('')
 const newImportance = ref('medium')
@@ -52,3 +45,4 @@ function add() {
   <ItemList :items="doneItems" title="Done Items" />
   <ItemList :items="toDoItems" title="ToDo Items" />
 </template>
+
