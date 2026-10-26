@@ -1,64 +1,69 @@
-// ...existing code...
+
 <script setup>
-import { ref, computed } from 'vue'
-import ItemList from './itemList.vue'
+import { ref, computed } from 'vue';
 
-const nextId = () => Date.now() + Math.random()
+let modalOpen = ref(false);
+let modal2Open = ref(false);
 
-const items = ref([
-  { id: nextId(), text: 'Piim', isDone: false },
-  { id: nextId(), text: 'Viin', isDone: true },
-  { id: nextId(), text: 'Sai', isDone: true },
-  { id: nextId(), text: 'Mac', isDone: false },
-])
+let answer = computed(() => {
+    return modalOpen.value ? 'modal is-active' : 'modal';
+});
 
-const newItem = ref('')
-
-const doneItems = computed(() => items.value.filter(item => item.isDone))
-const toDoItems = computed(() => items.value.filter(item => !item.isDone))
-
-function add() {
-  const text = newItem.value.trim()
-  if (!text) return
-
-  items.value.push({
-    id: nextId(),
-    text,
-    isDone: false,
-  })
-
-  newItem.value = ''
-}
+let answer2 = computed(() => {
+    return modal2Open.value ? 'modal is-active' : 'modal';
+});
 </script>
 
 <template>
-  <div class="container mt-3">
-    <div class="field has-addons">
-      <div class="control">
-        <input v-model="newItem" class="input" type="text" placeholder="Add item">
-      </div>
-      <div class="control">
-        <button class="button is-info" @click="add">Add</button>
-      </div>
+    <div class="container content mt-3">
+
+        <button class="button is-primary" @click="modalOpen = true">
+            Open Modal 1
+        </button>
+
+        <button class="button is-info" @click="modal2Open = true">
+            Open Modal 2
+        </button>
+
+        <!-- First Modal -->
+        <div :class="answer">
+            <div class="modal-background" @click="modalOpen = false"></div>
+
+            <div class="modal-content">
+                <div class="box">
+                    <h2>Modal 1</h2>
+                    <p>This is the first modal.</p>
+                    <button class="button is-danger" @click="modalOpen = false">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+            <button class="modal-close is-large"
+                aria-label="close"
+                @click="modalOpen = false">
+            </button>
+        </div>
+
+        <!-- Second Modal -->
+        <div :class="answer2">
+            <div class="modal-background" @click="modal2Open = false"></div>
+
+            <div class="modal-content">
+                <div class="box">
+                    <h2>Modal 2</h2>
+                    <p>This is the second modal.</p>
+                    <button class="button is-danger" @click="modal2Open = false">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+            <button class="modal-close is-large"
+                aria-label="close"
+                @click="modal2Open = false">
+            </button>
+        </div>
+
     </div>
-
-    <h1>All Items</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">
-        {{ item.text }}
-        <input type="checkbox" v-model="item.isDone">
-      </li>
-    </ul>
-
-    <h1>Done Items</h1>
-    <ul>
-      <li v-for="item in doneItems" :key="item.id">
-        {{ item.text }}
-        <input type="checkbox" v-model="item.isDone">
-      </li>
-    </ul>
-  </div>
-  <ItemList :items="items" title="All Items"></ItemList>
-  <ItemList :items="doneItems" title="Done Items"></ItemList>
-  <ItemList :items="toDoItems" title="To-Do Items"></ItemList>
 </template>
